@@ -1,0 +1,275 @@
+/* 기존 스타일 */
+
+.box1 {
+    background-color: lemonchiffon;
+    grid-area: box1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box11 {
+    background-color: skyblue;
+    grid-area: box11;
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 0px;
+}
+
+.box12 {
+    display: flex;
+    grid-area: box12;
+    min-width: 1200px;
+    height: auto;
+    padding-left: 0px;
+    margin: 0px;
+}
+
+.box22 {
+    grid-area: box22;
+    width: 40%;
+    height: auto;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+.box2 {
+    background-color: lemonchiffon;
+    grid-area: box2;
+    padding: 10px;
+}
+
+.box3 {
+    background-color: white;
+    justify-content: center;
+    grid-area: box3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box4 {
+    background-color: white;
+    padding-left: 10px;
+    justify-content: center;
+    grid-area: box4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box5 {
+    background-color: lemonchiffon;
+    grid-area: box5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: white;
+    overflow: hidden;
+    padding: 10px;
+    margin: 10px;
+}
+
+.box31 {
+    width: fit-content;
+    margin-left: 10px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: gray;
+    text-align: center;
+}
+
+.box41 {
+    width: auto;
+    margin-right: 10px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: gray;
+    text-align: center;
+}
+
+.wrapper {
+    width: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill);
+    grid-template-rows: repeat(auto-fill);
+    grid-gap: 1rem;
+    grid-template-areas:
+      "box1 box1 box1 box1 box1"
+      "box3 box4 box4 box4 box4"
+      "box5 box5 box5 box5 box5";
+}
+
+body {
+    background-color: white;
+}
+
+article {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+div > article {
+    background-color: ivory;
+}
+
+figure {
+    float: left;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.navi {
+    list-style-type: none;
+    width: 100%;
+    padding: 10;
+    margin: 10;
+    height: 30px;
+    background: lemonchiffon;
+    color: black;
+    line-height: 30px;
+    text-align: center;
+}
+
+.navi > li {
+    float: left;
+}
+
+.navi > li > a {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.subnavi {
+    width: 200px;
+    display: none;
+    position: absolute;
+    list-style-type: none;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    background: skyblue;
+}
+
+.navi > li:hover .subnavi {
+    display: block;
+}
+
+.subnavi > li > a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.subnavi > li > a:hover {
+    background: pink;
+    transition: ease 0.3s;
+}
+
+#foot {
+    width: auto-fit;
+    height: 80px;
+    background: lemonchiffon;
+    color: black;
+    line-height: 25px;
+    margin: 0;
+    text-align: center;
+}
+
+#foot > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "box1"
+            "box3"
+            "box4"
+            "box5";
+    }
+
+    .box12 {
+        min-width: auto;
+        flex-direction: column;
+    }
+
+    .navi > li > a {
+        width: 100%;
+    }
+}
+
+/* 새로운 스타일 */
+
+.sticky-note {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 16px;
+  display: inline-block;
+}
+
+.sticky-note.gold {
+  background: linear-gradient(145deg, #f6e58d, #f7d794);
+}
+
+.sticky-note.silver {
+  background: linear-gradient(145deg, #c0c0c0, #d3d3d3);
+}
+
+.sticky-note.beige {
+  background: linear-gradient(145deg, #f5f5dc, #f5f5e0);
+}
+
+.sticky-note.dark-gray {
+  background: linear-gradient(145deg, #a9a9a9, #b0b0b0);
+  color: white;
+}
+
+.sticky-note.black {
+  background: linear-gradient(145deg, #000000, #333333);
+  color: white;
+}
+
+.sticky-note h5 {
+  margin: 0 0 8px 0;
+}
+
+.sticky-note p {
+  margin: 4px 0;
+}
+
+.star {
+  color: gold;
+}
+
+.review-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}

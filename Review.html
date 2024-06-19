@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리뷰 작성</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .stars {
+      display: inline-block;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .stars .fa-star {
+      color: #ccc;
+    }
+    .stars .fa-star.checked {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <header class="p-3 bg-light">
+    <div class="container">
+      <h1 class="display-4">나만의 맛집 리뷰</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="home.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">리뷰 작성</li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+    <h2 class="my-4">리뷰 작성하기</h2>
+    <div id="error-msg" class="alert alert-danger d-none" role="alert">
+      리뷰 저장에 실패했습니다.
+    </div>
+    <form id="reviewForm">
+      <div class="form-group">
+        <label for="restaurant">식당 이름</label>
+        <input type="text" class="form-control" id="restaurant" required>
+      </div>
+      <div class="form-group">
+        <label for="dish">음식 이름</label>
+        <input type="text" class="form-control" id="dish" required>
+      </div>
+      <div class="form-group">
+        <label>별점 선택</label>
+        <div class="stars" id="starRating">
+          <i class="fas fa-star star" data-value="1"></i>
+          <i class="fas fa-star star" data-value="2"></i>
+          <i class="fas fa-star star" data-value="3"></i>
+          <i class="fas fa-star star" data-value="4"></i>
+          <i class="fas fa-star star" data-value="5"></i>
+        </div>
+        <input type="hidden" id="star" name="star" value="0" required>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="saveReview()">리뷰 저장하기</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const stars = document.querySelectorAll('.stars .star');
+      const starInput = document.getElementById('star');
+
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          const value = parseInt(star.getAttribute('data-value'));
+          starInput.value = value;
+
+          // Remove all checked classes
+          stars.forEach(s => s.classList.remove('checked'));
+
+          // Add checked class up to the clicked star
+          for (let i = 0; i < value; i++) {
+            stars[i].classList.add('checked');
+          }
+        });
+      });
+    });
+
+    function saveReview() {
+      const restaurant = document.getElementById('restaurant').value;
+      const dish = document.getElementById('dish').value;
+      const star = parseInt(document.getElementById('star').value);
+      const date = new Date().toLocaleDateString();
+
+      // Validate star rating
+      if (star < 1 || star > 5) {
+        alert('별점은 1부터 5까지만 선택 가능합니다.');
+        return;
+      }
+
+      const review = { restaurant, dish, star, date };
+      let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+      reviews.push(review);
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+
+      // Clear form fields
+      document.getElementById('restaurant').value = '';
+      document.getElementById('dish').value = '';
+      document.getElementById('star').value = '0';
+      document.querySelectorAll('.stars .star').forEach(s => s.classList.remove('checked'));
+
+      alert('리뷰가 저장되었습니다!');
+    }
+  </script>
+</body>
+</html>
